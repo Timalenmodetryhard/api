@@ -17,4 +17,32 @@ export class AnimalsRepository {
   public async getAnimal(id: number): Promise<Animal> {
     return this.animalsRepository.findOne({ where: { id: id } });
   }
+
+  public async addAnimal(
+    name: string, 
+    dateOfBirth: string,
+    species: string,
+    breed: string,
+    color: string,
+    weight: string,
+    ownerId: number
+  ): Promise<Animal> {
+    return this.animalsRepository.save({ 
+      name: name, 
+      dateOfBirth: dateOfBirth, 
+      species: species, 
+      breed: breed,
+      color: color,
+      weight: weight,
+      ownerId: ownerId 
+    });
+  }
+
+  public async updateAnimal(animal: Animal) {
+    return this.animalsRepository.save(animal);
+  }
+
+  public async deleteAnimal(id: number): Promise<void> {
+    await this.animalsRepository.delete({ id });
+  }
 }

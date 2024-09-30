@@ -17,4 +17,26 @@ export class PersonsRepository {
   public async getPerson(id: number): Promise<Person> {
     return this.personRepository.findOne({ where: { id: id } });
   }
+
+  public async addPerson(
+    lastName: string, 
+    firstName: string, 
+    email: string, 
+    phoneNumber: string
+  ): Promise<Person> {
+    return this.personRepository.save({ 
+      lastName: lastName, 
+      firstName: firstName, 
+      email: email, 
+      phoneNumber: phoneNumber 
+    });
+  }
+
+  public async updatePerson(person: Person) {
+    return this.personRepository.save(person);
+  }
+
+  public async deletePerson(id: number): Promise<void> {
+    await this.personRepository.delete({ id });
+  }
 }
